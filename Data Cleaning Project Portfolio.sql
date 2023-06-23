@@ -5,7 +5,7 @@ Cleaning Data in SQL Queries
 */
 
 --------------------------------------------------------------------------------------------------------------------------
---- Standardize Date Format
+---- Standardize Date Format
 SELECT SaleDateConverted, CONVERT(DATE,SaleDate)
 FROM ProjectPortfolio.dbo.NashvilleHousing;
 
@@ -25,7 +25,7 @@ SELECT * FROM ProjectPortfolio.dbo.NashvilleHousing;
 
 
  --------------------------------------------------------------------------------------------------------------------------
---- Populate Property Address data
+---- Populate Property Address data
 SELECT a.ParcelID, a.PropertyAddress, b.ParcelID, b.PropertyAddress, ISNULL(a.PropertyAddress,b.PropertyAddress)
 FROM ProjectPortfolio.dbo.NashvilleHousing a
 JOIN ProjectPortfolio.dbo.NashvilleHousing b
@@ -48,7 +48,7 @@ SELECT * FROM ProjectPortfolio.dbo.NashvilleHousing ORDER BY ParcelID;
 
 
 --------------------------------------------------------------------------------------------------------------------------
---- Breaking out Address into Individual Columns (Address, City, State)
+---- Breaking out Address into Individual Columns (Address, City, State)
 SELECT PropertyAddress FROM ProjectPortfolio.dbo.NashvilleHousing;
 
 
@@ -89,19 +89,19 @@ FROM ProjectPortfolio.dbo.NashvilleHousing;
 ALTER TABLE NashvilleHousing
 ADD OwnerSplitAddress NVARCHAR(255);
 
-Update NashvilleHousing
+UPDATE NashvilleHousing
 SET OwnerSplitAddress = PARSENAME(REPLACE(OwnerAddress, ',', '.') , 3)
 
 ALTER TABLE NashvilleHousing
 ADD OwnerSplitCity NVARCHAR(255);
 
-Update NashvilleHousing
+UPDATE NashvilleHousing
 SET OwnerSplitCity = PARSENAME(REPLACE(OwnerAddress, ',', '.') , 2)
 
 ALTER TABLE NashvilleHousing
 ADD OwnerSplitState NVARCHAR(255);
 
-Update NashvilleHousing
+UPDATE NashvilleHousing
 SET OwnerSplitState = PARSENAME(REPLACE(OwnerAddress, ',', '.') , 1)
 
 -- Checking
@@ -110,7 +110,7 @@ SELECT * FROM ProjectPortfolio.dbo.NashvilleHousing;
 
 
 --------------------------------------------------------------------------------------------------------------------------
---- Change Y and N to Yes and No in "Sold as Vacant" field
+---- Change Y and N to Yes and No in "Sold as Vacant" field
 SELECT DISTINCT(SoldAsVacant), COUNT(SoldAsVacant) AS Vacant_Solds
 FROM ProjectPortfolio.dbo.NashvilleHousing
 GROUP BY SoldAsVacant
@@ -140,7 +140,7 @@ SELECT * FROM ProjectPortfolio.dbo.NashvilleHousing;
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---- Remove Duplicates
+---- Remove Duplicates
 -- Checking the Duplicates
 WITH RowNumCTE AS(
 	SELECT *,
@@ -178,7 +178,7 @@ SELECT * FROM ProjectPortfolio.dbo.NashvilleHousing;
 
 
 ---------------------------------------------------------------------------------------------------------
---- Delete Unused Columns
+---- Delete Unused Columns
 ALTER TABLE ProjectPortfolio.dbo.NashvilleHousing
 DROP COLUMN OwnerAddress, TaxDistrict, PropertyAddress, SaleDate;
 
@@ -187,55 +187,9 @@ SELECT * FROM ProjectPortfolio.dbo.NashvilleHousing;
 
 
 
------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------
-
---- Importing Data using OPENROWSET and BULK INSERT	
-
---  More advanced and looks cooler, but have to configure server appropriately to do correctly
---  Wanted to provide this in case you wanted to try it
+---------------------------------------------------------------------------------------------------------
 
 
---sp_configure 'show advanced options', 1;
---RECONFIGURE;
---GO
---sp_configure 'Ad Hoc Distributed Queries', 1;
---RECONFIGURE;
---GO
-
-
---USE PortfolioProject 
-
---GO 
-
---EXEC master.dbo.sp_MSset_oledb_prop N'Microsoft.ACE.OLEDB.12.0', N'AllowInProcess', 1 
-
---GO 
-
---EXEC master.dbo.sp_MSset_oledb_prop N'Microsoft.ACE.OLEDB.12.0', N'DynamicParameters', 1 
-
---GO 
-
-
----- Using BULK INSERT
-
---USE PortfolioProject;
---GO
---BULK INSERT nashvilleHousing FROM 'C:\Temp\SQL Server Management Studio\Nashville Housing Data for Data Cleaning Project.csv'
---   WITH (
---      FIELDTERMINATOR = ',',
---      ROWTERMINATOR = '\n'
---);
---GO
-
-
----- Using OPENROWSET
---USE PortfolioProject;
---GO
---SELECT * INTO nashvilleHousing
---FROM OPENROWSET('Microsoft.ACE.OLEDB.12.0',
---    'Excel 12.0; Database=C:\Users\alexf\OneDrive\Documents\SQL Server Management Studio\Nashville Housing Data for Data Cleaning Project.csv', [Sheet1$]);
---GO
 
 
 
