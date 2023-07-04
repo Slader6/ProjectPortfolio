@@ -1,7 +1,9 @@
 ### Data Used
 
 **Data** - HR Data with over 300000 from the year 1985 - 2005
+
 **Data Analysis** - MySQL Workbench
+
 **Data Visualization** - Tableau
 
 ### Questions 
