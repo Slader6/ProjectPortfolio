@@ -1,25 +1,29 @@
-# HR Dashboard using MySQL and Tableau
+![image](https://github.com/jespercv/Other-Projects/assets/134806974/4d38bde6-05c2-440e-b357-1aa59363d68a)# HR Dashboard using MySQL and Tableau
 
 ![[Pasted image 20230705063340.png]]
 
 ### Data Used
 
-**Data** - HR Data with over 300000 from the year 1985 - 2005
+**Data** - HR Data with over 170000 from the year 2019
 
-**Data Analysis** - MySQL Workbench
+**Data Analysis** - Pandas and Numpy
 
-**Data Visualization** - Tableau
+**Data Visualization** - Matplotlib
 
 ### Questions 
 
-1. Create a visualization that provides a breakdown between the male and female employees working in the company each year, starting from 1990.
-2. Compare the number of male managers to the number of female managers from different departments for each year, starting from 1990.
-3. Compare the average salary of female versus male employees in the entire company until year 2002, and add a filter allowing you to see that per each department.
-4. Create an SQL stored procedure that will allow you to obtain the average male and female salary per department within a certain salary range. Let this range be defined by two values the user can insert when calling the procedure.
+1. What was the best month for sales? How much was earned that month?
+![image](https://github.com/jespercv/Other-Projects/assets/134806974/82c6a1e4-a84b-4e18-a8b9-4534387c52fc)
 
-### Summary of Findings
+2. What city sold the most product?
+![image](https://github.com/jespercv/Other-Projects/assets/134806974/d58ce48c-4e30-42e7-a9d4-5935c3e55202)
 
-1. There are more male employees than female female employees.
-2. The number of female managers are more than the male managers by more than 70%.
-3. In the year 1990 the salary of male and female employees are almost equal but in the year of 2002 the male employees exceeded the salary of female employees by more than $5000.
-4. The average salary of both genders are more than $60,000.
+3. What time should we display advertisements to maximize likelihood of customer's buying product?
+![image](https://github.com/jespercv/Other-Projects/assets/134806974/0a5c7733-babd-41f0-b493-3f02af0b6f56)
+
+4. What products are most often sold together?
+
+  
+5. What product sold the most? Why do you think it sold the most?
+![image](https://github.com/jespercv/Other-Projects/assets/134806974/99757d68-81fa-4536-afab-1911955c64c1)
+
